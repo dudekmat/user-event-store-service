@@ -1,4 +1,4 @@
-package com.github.dudekmat.usereventstoreservice.config;
+package com.github.dudekmat.usereventstoreservice.config.elasticsearch;
 
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.json.jackson.JacksonJsonpMapper;
