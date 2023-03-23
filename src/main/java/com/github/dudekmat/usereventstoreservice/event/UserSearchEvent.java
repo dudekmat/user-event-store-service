@@ -1,14 +1,12 @@
 package com.github.dudekmat.usereventstoreservice.event;
 
-import lombok.Builder;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
-@Builder
-public record UserSearchEvent(String eventType, String userId, String sessionId, Long eventTime,
-                       String productId, String query, String searchParams,
-                       String platform) implements UserEvent {
+public record UserSearchEvent(@NotBlank String eventType, @NotBlank String userId,
+                              @NotBlank String sessionId, @NotNull Long eventTime,
+                              @NotBlank String productId, @NotBlank String query,
+                              String searchParams, String platform) implements UserEvent {
 
-  @Override
-  public String key() {
-    return userId;
-  }
+
 }

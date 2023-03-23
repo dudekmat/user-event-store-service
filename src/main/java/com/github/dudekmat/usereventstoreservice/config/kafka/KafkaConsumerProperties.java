@@ -1,4 +1,4 @@
-package com.github.dudekmat.usereventstoreservice.config;
+package com.github.dudekmat.usereventstoreservice.config.kafka;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
