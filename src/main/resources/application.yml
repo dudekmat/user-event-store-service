@@ -1,0 +1,12 @@
+server:
+  port: 8081
+kafka:
+  consumer:
+    bootstrap-servers: localhost:9092
+    group-id: user-event-store-service
+    auto-offset-reset: latest
+    max-poll-records: 100
+elasticsearch:
+  host: localhost:9200
+  username: admin
+  password: password
