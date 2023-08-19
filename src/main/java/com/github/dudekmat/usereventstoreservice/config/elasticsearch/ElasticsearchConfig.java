@@ -18,9 +18,12 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @EnableConfigurationProperties(ElasticsearchProperties.class)
 @RequiredArgsConstructor
-class ElasticsearchConfig {
+public class ElasticsearchConfig {
 
   private final ElasticsearchProperties elasticsearchProperties;
+
+  public static final String PRODUCT_EVENT_INDEX = "product-event";
+  public static final String SEARCH_EVENT_INDEX = "search-event";
 
   @Bean
   public ElasticsearchClient elasticsearchClient() {
