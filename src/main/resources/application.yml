@@ -7,6 +7,6 @@ kafka:
     auto-offset-reset: latest
     max-poll-records: 100
 elasticsearch:
-  host: localhost:9200
+  host: http://localhost:9200
   username: admin
   password: password

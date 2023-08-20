@@ -6,9 +6,9 @@ import lombok.Value;
 
 @Value
 @Builder
-public class SearchEventData {
+public class SearchEventData implements EventData {
 
-  UUID id;
+  String id;
   String eventType;
   String userId;
   String sessionId;
@@ -17,4 +17,9 @@ public class SearchEventData {
   String query;
   String searchParams;
   String platform;
+
+  @Override
+  public String id() {
+    return id;
+  }
 }

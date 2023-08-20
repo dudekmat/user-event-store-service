@@ -29,8 +29,8 @@ class UserEventListener {
   )
   void handleUserSearchEvent(@Payload @Valid UserSearchEvent userSearchEvent) {
     log.info("Processing user search event: {}", userSearchEvent);
-    userEventRepository.saveSearchEvent(SearchEventData.builder()
-        .id(UUID.randomUUID())
+    userEventRepository.saveEvent(SearchEventData.builder()
+        .id(UUID.randomUUID().toString())
         .eventType(userSearchEvent.eventType())
         .userId(userSearchEvent.userId())
         .sessionId(userSearchEvent.sessionId())
@@ -50,8 +50,8 @@ class UserEventListener {
   )
   void handleUserProductEvent(@Payload @Valid UserProductEvent userProductEvent) {
     log.info("Processing user product event: {}", userProductEvent);
-    userEventRepository.saveProductEvent(ProductEventData.builder()
-        .id(UUID.randomUUID())
+    userEventRepository.saveEvent(ProductEventData.builder()
+        .id(UUID.randomUUID().toString())
         .eventType(userProductEvent.eventType())
         .userId(userProductEvent.userId())
         .sessionId(userProductEvent.sessionId())

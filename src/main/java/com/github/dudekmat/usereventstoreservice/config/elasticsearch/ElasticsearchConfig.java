@@ -33,7 +33,7 @@ public class ElasticsearchConfig {
         new UsernamePasswordCredentials(elasticsearchProperties.username(),
             elasticsearchProperties.password()));
 
-    RestClient restClient = RestClient.builder(new HttpHost(elasticsearchProperties.host()))
+    RestClient restClient = RestClient.builder(HttpHost.create(elasticsearchProperties.host()))
         .setHttpClientConfigCallback(httpClientBuilder ->
             httpClientBuilder.setDefaultCredentialsProvider(credentialsProvider))
         .build();

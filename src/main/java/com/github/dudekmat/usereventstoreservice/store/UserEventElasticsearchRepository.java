@@ -1,6 +1,7 @@
 package com.github.dudekmat.usereventstoreservice.store;
 
 import static com.github.dudekmat.usereventstoreservice.config.elasticsearch.ElasticsearchConfig.PRODUCT_EVENT_INDEX;
+import static com.github.dudekmat.usereventstoreservice.config.elasticsearch.ElasticsearchConfig.SEARCH_EVENT_INDEX;
 
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import java.io.IOException;
@@ -15,31 +16,28 @@ class UserEventElasticsearchRepository implements UserEventRepository {
 
   private final ElasticsearchClient elasticsearchClient;
 
-  private static final String ERROR_MESSAGE = "Error occurred indexing document: ";
+  private static final String ERROR_MESSAGE = "Error occurred indexing document: {}, message: {}";
 
   @Override
-  public void saveProductEvent(ProductEventData productEventData) {
+  public void saveEvent(EventData eventData) {
     try {
       elasticsearchClient.index(request ->
           request
-              .index(PRODUCT_EVENT_INDEX)
-              .id(productEventData.getProductId())
-              .document(productEventData));
+              .index(resolveIndex(eventData))
+              .id(eventData.id())
+              .document(eventData));
     } catch (IOException ex) {
-      log.error(ERROR_MESSAGE + productEventData);
+      log.error(ERROR_MESSAGE, eventData, ex.getMessage());
     }
   }
 
-  @Override
-  public void saveSearchEvent(SearchEventData searchEventData) {
-    try {
-      elasticsearchClient.index(request ->
-          request
-              .index(PRODUCT_EVENT_INDEX)
-              .id(searchEventData.getProductId())
-              .document(searchEventData));
-    } catch (IOException ex) {
-      log.error(ERROR_MESSAGE + searchEventData);
+  private String resolveIndex(EventData eventData) {
+    if (eventData instanceof ProductEventData) {
+      return PRODUCT_EVENT_INDEX;
+    } else if (eventData instanceof SearchEventData) {
+      return SEARCH_EVENT_INDEX;
+    } else {
+      throw new RuntimeException("Unknown index");
     }
   }
 }
